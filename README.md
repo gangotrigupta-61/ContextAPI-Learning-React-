@@ -1,16 +1,49 @@
-# React + Vite
+# 7ContextAPILearning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal React + Vite app demonstrating the Context API to share a `user` object and `setUser` across components.
 
-Currently, two official plugins are available:
+Quick start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+npm run preview
+```
 
-## Expanding the ESLint configuration
+Key files
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- src/main.jsx — app entry
+- src/App.jsx — wraps UI with `UserContextProvider`
+- src/Context/UserContext.js — `React.createContext()`
+- src/Context/UserContextProvider.jsx — provides `{ user, setUser }`
+- src/Components/Login.jsx — sets user via `setUser`
+- src/Components/Profile.jsx — reads `user` from context
+
+What `UserContext` and `UserContextProvider` do
+
+- `UserContext`: the shared context object created with `React.createContext()`; used with `useContext(userContext)`.
+- `UserContextProvider`: holds `user` via `useState(null)`, provides `{ user, setUser }` to descendants using `<userContext.Provider>` and wraps the app.
+
+Usage flow
+
+1. `Login` calls `setUser({ username, password })`.
+2. `Profile` reads `user` and renders accordingly.
+
+Notes
+
+- Fix: in `Profile.jsx` change `if(!user) return` to `if (!user) return (<div>Please Login</div>);` to avoid an empty render.
+- This example keeps passwords in memory only — use proper auth for production.
+
+Improvements
+
+- Persist `user` to `localStorage` and restore on load.
+- Add `signOut()` helper and input validation.
+- Migrate to TypeScript or add PropTypes for typing.
+
+If you'd like, I can patch `Profile.jsx` now or add `localStorage` persistence.

@@ -6,6 +6,7 @@ import Profile from './Components/Profile'
 
 function App() {
   return (
+
     <UserContextProvider>
       <h1>Learning ContextAPI</h1>
 
@@ -13,6 +14,7 @@ function App() {
       <Profile/>
 
     </UserContextProvider>
+    
   )
 }
 
