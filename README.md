@@ -46,4 +46,3 @@ Improvements
 - Add `signOut()` helper and input validation.
 - Migrate to TypeScript or add PropTypes for typing.
 
-If you'd like, I can patch `Profile.jsx` now or add `localStorage` persistence.
